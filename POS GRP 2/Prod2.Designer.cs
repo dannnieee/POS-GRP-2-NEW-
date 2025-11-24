@@ -82,7 +82,7 @@
             btnMinus.TabIndex = 3;
             btnMinus.Text = "-";
             btnMinus.UseVisualStyleBackColor = false;
-            btnMinus.Click += btnMinus_Click;
+        
             // 
             // lblUnitPrice
             // 

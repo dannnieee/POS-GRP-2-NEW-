@@ -71,7 +71,7 @@
             btnLess.TabIndex = 4;
             btnLess.Text = "_";
             btnLess.UseVisualStyleBackColor = false;
-            btnLess.Click += button1_Click;
+        
             // 
             // pictureBox1
             // 
@@ -124,7 +124,7 @@
             Controls.Add(panel1);
             Name = "Prod1";
             Size = new Size(229, 248);
-            Load += Prod1_Load;
+            
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

@@ -1,66 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace POS_GRP_2
 {
     public partial class Prod1 : UserControl
     {
-        public decimal TotalPrice => unitPrice * quantity;
-        decimal unitPrice = 59.00m;
-        int quantity = 0;
-
+        private int quantity = 0;
+        private decimal price = 59m;
 
         public event EventHandler QuantityChanged;
 
+        public string ProductName => "Chocolate Chip Cookie";
 
-        public Prod1()
+        public int Quantity
         {
-            InitializeComponent();
-            lblUnitPrice.Text = $"₱ {unitPrice}";
-            UpdateQuantityDisplay();
-        }
-
-        private void Prod1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (quantity > 0)
+            get => quantity;
+            private set
             {
-                quantity--;
-                UpdateQuantityDisplay();
+                quantity = value;
+                lblQuantity.Text = quantity.ToString();
                 QuantityChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
+        public decimal TotalPrice => price * Quantity;
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        public Prod1()
         {
-            quantity++;
-            UpdateQuantityDisplay();
-            QuantityChanged?.Invoke(this, EventArgs.Empty);
-
-
-
-        }
-        private void UpdateQuantityDisplay()
-        {
-            lblQuantity.Text = quantity.ToString();
+            InitializeComponent();
+            lblQuantity.Text = "0";
         }
 
-        
+        private void btnAdd_Click(object sender, EventArgs e) => Quantity++;
+        private void btnSubtract_Click(object sender, EventArgs e) { if (Quantity > 0) Quantity--; }
+        public void ResetQuantity() => Quantity = 0;
     }
 }
-
-
-
-

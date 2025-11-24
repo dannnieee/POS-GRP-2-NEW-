@@ -12,45 +12,37 @@ namespace POS_GRP_2
 {
     public partial class Prod2 : UserControl
     {
-        public decimal TotalPrice => unitPrice * quantity;
-        decimal unitPrice = 99.00m;
-        int quantity = 0;
+        private int quantity = 0;
+        private decimal price = 99m;
 
         public event EventHandler QuantityChanged;
 
-        public Prod2()
-        {
-            InitializeComponent();
-            lblUnitPrice.Text = $"₱ {unitPrice}";
-            UpdateQuantityDisplay();
-           
-        }
+        public string ProductName => "Chocolate Frappuccino";
 
-        private void btnMinus_Click(object sender, EventArgs e)
+        public int Quantity
         {
-            if (quantity > 0)
+            get => quantity;
+            private set
             {
-                quantity--;
-                UpdateQuantityDisplay();
+                quantity = value;
+                lblQuantity.Text = quantity.ToString();
                 QuantityChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        public decimal TotalPrice => price * Quantity;
+
+        public Prod2()
         {
-            quantity++;
-            UpdateQuantityDisplay();
-            QuantityChanged?.Invoke(this, EventArgs.Empty);
+            InitializeComponent();
+            lblQuantity.Text = "0";
         }
 
-        private void UpdateQuantityDisplay()
-        {
-            lblQuantity.Text = quantity.ToString();
-        }
+        private void btnAdd_Click(object sender, EventArgs e) => Quantity++;
+        private void btnSubtract_Click(object sender, EventArgs e) { if (Quantity > 0) Quantity--; }
+        public void ResetQuantity() => Quantity = 0;
     }
 }
-
-
 
 
 
